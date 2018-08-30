@@ -2,15 +2,7 @@ const sql = require('mysql');
 const fs = require('fs');
 
 const sql_info_filename = 'sql_credential.json';
-//Read file from sql_credential.json
-/*
-Example sql_credential.json :
-{
-  "host": "point_to_mcds_db",
-  "user": "ccc",
-  "password": "ccc"
-}
- */
+
 if(!fs.existsSync(sql_info_filename)) {
     throw sql_info_filename + ' not found! Example content of ' + sql_info_filename + ' is : {\n' +
     '  "host": "point_to_mcds_db",\n' +

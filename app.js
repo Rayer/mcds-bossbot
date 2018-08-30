@@ -24,7 +24,7 @@ function logic(bot, slack, sqlconn) {
 
     bot.on('start', function() {
         bot.postMessageToChannel('test', 'BossBot initialized at ' + os.hostname());
-        //bot.postMessageToUser('rayershih', 'Initialized BossBot!');
+
     });
 
     bot.on('message', function(msg) {
