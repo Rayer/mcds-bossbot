@@ -1,6 +1,7 @@
 var Bot = require('slackbots');
 var Slack = require('slack');
 var conn = require('./sql');
+var os = require('os');
 
 var bot_token = '';
 conn.query("select * from mcds.app_sensitive_values where app_name = 'bossbot' and `key` = 'bot_api_token';", function(err, result) {
@@ -22,8 +23,8 @@ conn.query("select * from mcds.app_sensitive_values where app_name = 'bossbot' a
 function logic(bot, slack, sqlconn) {
 
     bot.on('start', function() {
-        bot.postMessageToChannel('test', 'Hi I am your new boss bot!');
-        bot.postMessageToUser('rayershih', 'Initialized BossBot!');
+        bot.postMessageToChannel('test', 'BossBot initialized at ' + os.hostname());
+        //bot.postMessageToUser('rayershih', 'Initialized BossBot!');
     });
 
     bot.on('message', function(msg) {
