@@ -1,21 +1,21 @@
-var Bot = require('slackbots');
-var Slack = require('slack');
-var conn = require('./sql');
-var os = require('os');
+const Bot = require('slackbots');
+const Slack = require('slack');
+const conn = require('./sql');
+const os = require('os');
 
-var bot_token = '';
+let bot_token = '';
 conn.query("select * from mcds.app_sensitive_values where app_name = 'bossbot' and `key` = 'bot_api_token';", function(err, result) {
     if(err) throw err;
     console.log('result : ');
     console.log(result);
     bot_token = result[0].value;
-    var settings = {
-        token : result[0].value,
-        name : 'BossBot'
+    const settings = {
+        token: result[0].value,
+        name: 'BossBot'
     };
 
-    var bot = new Bot(settings);
-    var slack = new Slack();
+    const bot = new Bot(settings);
+    const slack = new Slack();
     logic(bot, slack, conn);
 });
 

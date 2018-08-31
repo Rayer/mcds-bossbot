@@ -10,10 +10,10 @@ if(!fs.existsSync(sql_info_filename)) {
     '  "password": "ccc"\n' +
     '}';
 }
-var sql_info_txt = fs.readFileSync(sql_info_filename);
-var sql_info = JSON.parse(sql_info_txt);
+const sql_info_txt = fs.readFileSync(sql_info_filename);
+const sql_info = JSON.parse(sql_info_txt);
 
-var conn = sql.createConnection(sql_info);
+let conn = sql.createConnection(sql_info);
 
 conn.connect(function(err) {
     if(err) throw err;
