@@ -38,11 +38,11 @@ function logic(bot, slack, sqlconn) {
                 user: msg.user
             }, (err, data) => {
                 if(err) throw err;
-                console.log(data);
+                //console.log(data);
                 let name = data.user.name;
                 bot.postMessageToUser(name, 'Howdy here, I\'ve got your meesage : ' + msg.text);
                 //Use keyword chatbot engine handle all status
-                console.log(msg);
+                //console.log(msg);
             }
         );
     });
