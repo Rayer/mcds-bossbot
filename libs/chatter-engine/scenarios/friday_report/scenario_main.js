@@ -42,3 +42,7 @@ function enterScenario() {
 function exitScenario() {
     current_state.exitState();
 }
+
+module.exports.entryKeywords = {
+
+};
