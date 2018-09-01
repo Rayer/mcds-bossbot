@@ -42,5 +42,13 @@ bossbot: submit? [OK] [CANCEL]
 
 簡單的說，Scenario就是一個state，而每個Scenario有自己的state。主Scenario叫做**MainScenario**，讓我給她想個有趣一點的名字.....總之，所以在這個case裡面，我們有四個Scenario，而每個Scenario結束完以後預設都是回到MainScenario去。
 
+## User-Context
+
+這個引擎並不是只有跟一個人對話，他是跟很多人交談。然而，每個人跟引擎之間的交談都是獨立的，所以我們會有一個context來儲存目前對話的參數以及state等等。
+
+## Dialog-Context
+
+每個Scenario都是一組完整的對話，也許這個state要攜帶某些對話內容或者parse的結果到下一個state甚至其他的Scenario。
+
 
 

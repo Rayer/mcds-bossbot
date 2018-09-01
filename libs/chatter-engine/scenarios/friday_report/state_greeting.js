@@ -1,11 +1,15 @@
-function enterState() {
+function GreetingState() {
 
 }
 
-function logic() {
+GreetingState.prototype.enter_state = function() {
 
 }
 
-function exitState() {
+GreetingState.prototype.exit_state = function() {
 
 }
+
+
+
+module.exports = GreetingState;

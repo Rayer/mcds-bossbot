@@ -1,48 +1,43 @@
-//This keyword defines which keyword will trigger this scenario. It will be checked during registration.
-const enter_keywords = []; // No enter keyword, it if default scenario
-//This timeout defines timeout that this scenario get last input. 0 for never timeout(not recommend except main scenario)
-const scenario_timeout = 0;
-let states = [];
-let current_state;
-
-//Main Scenario only, list of all scenario
-const sub_scenario_list = [];
-function initialization() {
-    //Register all sub scenarios
-
-    registerScenario('friday_report');
-    /*
-    Here registers state. State have its own order
-    If state.nextState(string) is not defined, it will go by order
-     */
-    registerState('greeting');
+function Scenario(user_context) {
+    this.state = [];
+    this.current_state = new require('./state_greeting');
+    this.sub_scenario_info_list = [];
+    this.upper_context = user_context;
+    this.entry_keywords = ['friday report', 'weekend report'];
+    this.register_state('greeting');
 }
 
-function registerScenario(scenarioName) {
-    const scenario = require('../' + scenarioName + '/scenario_main');
-    sub_scenario_list.push(scenario);
+Scenario.prototype.input = function(id, message) {
+    //if message have keyword, enter that scenario
+    for (var scenario_info in sub_scenario_list) {
+        if (scenario_info.scenario.accept_keyhword(id, message)) {
+            //upper context will handle enter_scenario() ane exit_scenario()
+            this.upper_context.change_scenario(this, scenario_info.instance);
+            break;
+        }
+    }
 }
 
-function registerState(stateName) {
-    /*
-    Here is detail about register State.
-    Each State comes with an array of "Exit" to indicates which keyword will exit this state.
-    State.nextState(string) indicates next state, however, if not implemented, it will go next state in Scenario State List.
-     */
-    const state = require('state_' + stateName);
-    states.push(state);
-
-}
-
-function enterScenario() {
-    current_state = states[0];
-    current_state.enterState();
-}
-
-function exitScenario() {
-    current_state.exitState();
-}
-
-module.exports.entryKeywords = {
+Scenario.prototype.register_state = function(stateName) {
 
 };
+
+Scenario.prototype.entry_keywords = function() {
+    return this.entry_keywords;
+};
+
+Scenario.prototype.accept_keyword = function(sentence) {
+    return enter_keywords.some(word => sentence.includes(word));
+
+};
+
+Scenario.enter_scenario = function() {
+    console.log('Entered scenario Friday Report');
+};
+
+Scenario.exit_scenario = function() {
+    console.log('Exited scenario Friday Report');
+};
+
+
+module.exports = Scenario;
