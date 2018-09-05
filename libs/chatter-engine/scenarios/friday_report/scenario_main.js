@@ -4,7 +4,7 @@ function Scenario(user_context) {
     this.sub_scenario_info_list = [];
     this.upper_context = user_context;
     this.entry_keywords = ['friday report', 'weekend report'];
-    this.register_state('greeting');
+    //this.register_state('greeting');
 }
 
 Scenario.prototype.input = function(id, message) {
@@ -16,7 +16,7 @@ Scenario.prototype.input = function(id, message) {
             break;
         }
     }
-}
+};
 
 Scenario.prototype.register_state = function(stateName) {
 

@@ -40,9 +40,9 @@ function logic(bot, slack, sqlconn) {
                 if(err) throw err;
                 //console.log(data);
                 let name = data.user.name;
-                bot.postMessageToUser(name, 'Howdy here, I\'ve got your meesage : ' + msg.text);
-                //Use keyword chatbot engine handle all status
-                //console.log(msg);
+                //bot.postMessageToUser(name, 'Howdy here, ' + data.user.real_name + '! I\'ve got your meesage : ' + msg.text);
+                let engine = require('./libs/chatter-engine/engine');
+                bot.postMessageToUser(name, engine.input(name, msg.text));
             }
         );
     });

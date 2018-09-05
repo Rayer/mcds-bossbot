@@ -3,33 +3,34 @@ function Scenario(user_context) {
     this.current_state = new require('./state_greeting');
     this.sub_scenario_info_list = [];
     this.upper_context = user_context;
+    this.a = 'aaa';
     this.entryKeywords = []; //Root scenario doesn't need keyword
 
     this.register_scenario('friday_report');
     this.register_scenario('weekly_report');
 
-    this.register_state('greeting');
+    //this.register_state('greeting');
 }
 
 Scenario.prototype.register_scenario = function(scenario_name) {
-    const scenario = new require('../' + scenario_name + '/scenario_main');
-    let scenario_info = {name: scenario_name, instance: scenario, entryKeywords: scenario.entry_keywords()};
-    this.sub_scenario_info_list.push(scenario_info);
-}
+    // const scenario = new require('../' + scenario_name + '/scenario_main');
+    // let scenario_info = {name: scenario_name, instance: scenario, entryKeywords: scenario.entry_keywords()};
+    // this.sub_scenario_info_list.push(scenario_info);
+};
 
-Scenario.prototype.input = function(id, message) {
+Scenario.prototype.input = function(message) {
     //if message have keyword, enter that scenario
-
-
+    return 'Hello there! from main scenario';
+    //return this.a;
 
     for (var scenario_info in sub_scenario_list) {
-        if (scenario_info.scenario.accept_keyhword(id, message)) {
+        if (scenario_info.scenario.accept_keyhword(message)) {
             //upper context will handle enter_scenario() ane exit_scenario()
             this.upper_context.change_scenario(this, scenario_info.instance);
             break;
         }
     }
-}
+};
 
 
 
